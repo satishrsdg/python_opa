@@ -1,0 +1,105 @@
+{
+  "products":{
+  
+    "Aidan": {
+    "category_assistant": "Aidan",
+    "category_name": "Dairy, eggs&chilled",
+    "sub_category": ["Dairy & eggs", "Fresh soup", "Ready meals"]
+    }, 
+    "Anne": {
+    "category_assistant": "Anne",
+    "category_name": "Dairy, eggs&chilled",
+    "sub_category": ["Dairy & eggs", "Fresh soup", "Ready meals"]
+    },
+    "Claire": {
+    "category_assistant": "Claire",
+    "category_name": "Beer, Wine & Spirits",
+    "sub_category": ["Beer",  "Wine", "Cider"]
+    },
+    "Dhruv": {
+    "category_assistant": "Dhruv",
+    "category_name": "Dairy, eggs&chilled",
+    "sub_category": ["Dairy & eggs", "Fresh soup", "Ready meals"]
+    },
+    "Fleur": {
+    "category_assistant": "Fleur",
+    "category_name": "Meat&Fish",
+    "sub_category": ["Lamb", "Chicken", "Beef"]
+    },
+    "Frank": {
+    "category_assistant": "Frank",
+    "category_name": "Beer, Wine & Spirits",
+    "sub_category": ["Cider", "Beer", "Wine"]
+    },
+    "Jesse": {
+    "category_assistant": "Jesse",
+    "category_name": "Beer, Wine & Spirits",
+    "sub_category": ["Cider", "Beer", "Wine"]
+    },
+    "Jill": {
+    "category_assistant": "Jill",
+    "category_name": "Meat&Fish",
+    "sub_category": ["Beef", "Lamb", "Chicken"]
+    },
+    "Jim": {
+    "category_assistant": "Jim",
+    "category_name": "Bakery",
+    "sub_category": ["Cakes & tarts", "Rolls & bagels", "Bread"]
+    },
+    "Jimmy": {
+    "category_assistant": "Jimmy",
+    "category_name": "Frozen",
+    "sub_category": ["Ice cream & ice", "Chips, pot. & rice", "Meals"]
+    },
+    "Joe": {
+    "category_assistant": "Joe",
+    "category_name": "Frozen",
+    "sub_category": ["Ice cream & ice", "Chips, pot. & rice", "Meals"]
+    },
+    "Kelly": {
+    "category_assistant": "Kelly",
+    "category_name": "Dairy, eggs&chilled",
+    "sub_category": ["Ready meals", "Dairy & eggs", "Fresh soup"]
+    },
+    "Marie": {
+    "category_assistant": "Marie",
+    "category_name": "Meat&Fish",
+    "sub_category": ["Lamb", "Beef", "Beef", "Beef", "Chicken", "Chicken", "Chicken", "Lamb", "Lamb"]
+    },
+    "Phoebe": {
+    "category_assistant": "Phoebe",
+    "category_name": "Bakery",
+    "sub_category": ["Cakes & tarts", "Rolls & bagels", "Bread"]
+    },
+    "Rhys": {
+    "category_assistant": "Rhys",
+    "category_name": "Meat&Fish",
+    "sub_category": ["Beef",  "Chicken", "Lamb"]
+    },
+    "Sam": {
+    "category_assistant": "Sam",
+    "category_name": "Frozen",
+    "sub_category": ["Chips, pot. & rice",  "Meals",  "Ice cream & ice"]
+    },
+    "satish": {
+    "category_assistant": "satish",
+    "category_name": "Bakery",
+    "sub_category": ["Cakes & tarts", "Bread", "Rolls & bagels", "Bread"]
+    },
+    "Wendy": {
+    "category_assistant": "Wendy",
+    "category_name": "Bakery",
+    "sub_category": ["Cakes & tarts", "Bread", "Rolls & bagels", "Cakes & tarts"]
+    },
+    "Will": {
+    "category_assistant": "Will",
+    "category_name": "Beer, Wine & Spirits",
+    "sub_category": ["Beer", "Cider", "Wine"]
+    },
+    "Zara": {
+    "category_assistant": "Zara",
+    "category_name": "Frozen",
+    "sub_category": ["Ice cream & ice","Meals","Chips, pot. & rice"]
+    }
+  }
+}

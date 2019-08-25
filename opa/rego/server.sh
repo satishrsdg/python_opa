@@ -1,0 +1,1 @@
+opa run -w -s opa/rego/product_policy_data.json opa/rego/product_policy.rego

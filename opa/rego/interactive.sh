@@ -1,0 +1,1 @@
+opa run -w --log-level debug -w -s product_policy_data.json product_policy.rego 

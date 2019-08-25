@@ -1,0 +1,3 @@
+FROM openpolicyagent/opa
+WORKDIR /usr/home/
+COPY ./rego/* /usr/home/rego/

@@ -1,0 +1,5 @@
+requests
+flask
+Flask-Bootstrap
+pytest
+git+http://github.com/open-policy-agent/rego-python
