@@ -3,12 +3,12 @@ services:
 
   pyapp:
     build: 
-      context: ./app
-      dockerfile: Dockerfile_app
+      context: ./src/app
+      dockerfile: Dockerfile_app.dev
       
     #restart: always
     container_name: pyapp-container
-    env_file: app/.env
+    env_file: ./src/app/.env
     ports: 
     # these environment variables have to be set in calling os shell
     # can't be read from .env file
@@ -16,20 +16,16 @@ services:
     - ${PY_PORT}:${PY_PORT}
       
     volumes:
-    - ./app:/usr/home/app
+    - ./src/app:/usr/home/src/app
     
-    # networks:
-    # - app-pyapp-network
-    # command:
-    #   - "sleep"
-    #   - "10000"
     command: 
       - "python"
-      - "/usr/home/app/app.py"
+      - "-m"
+      - "src.app.app"
 
   opa:
     build: 
-      context: ./opa
+      context: ./src/opa
       dockerfile: Dockerfile_opa
 
     container_name: opa-container
@@ -43,7 +39,7 @@ services:
     # authentication and authorization on the daemon. See the Security page for
     # details: https://www.openpolicyagent.org/docs/security.html.
     volumes:
-       - ./opa/rego:/usr/home/rego
+       - ./src/opa/rego:/usr/home/rego
     
     #command:
       # - "sleep"
@@ -54,10 +50,5 @@ services:
       - "-w"
       - "rego/product_policy_data.json"
       - "rego/product_policy.rego"
-    # networks:
-    # - app-pyapp-network
 
-# networks:
-#   app-pyapp-network:
-#     driver: bridge
   

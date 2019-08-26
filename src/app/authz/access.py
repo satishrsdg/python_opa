@@ -1,6 +1,6 @@
 import requests
 import json
-from . import opa
+from src.app.authz import opa as opa
 
 def is_access_allowed(input):
   

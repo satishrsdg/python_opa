@@ -42,3 +42,5 @@ https://blog.codeship.com/using-docker-compose-for-python-development/
 #Most important things specify host as "0.0.0.0" inside python app.run
 #alias docker_clean_images='docker rmi $(docker images -a --filter=dangling=true -q)'
 #alias docker_clean_ps='docker rm $(docker ps --filter=status=exited --filter=status=created -q)'
+
+https://www.patricksoftwareblog.com/testing-a-flask-application-using-pytest/

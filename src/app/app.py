@@ -5,9 +5,10 @@ import os
 from flask import request
 from flask_bootstrap import Bootstrap
 from flask import g
-from db import db_setup
-from authz import access
 from flask import render_template
+
+from src.app.db import db_setup as db_setup
+from src.app.authz import access as access
 
 app = flask.Flask(__name__)
 Bootstrap(app)
@@ -46,11 +47,10 @@ def get_restricted_products():
 
 @app.teardown_appcontext
 def close_connection(e):
-  if conn is not None:
-    conn.close()
+  print('tear down')
+  db_setup.clean_up(get_conn())
 
-if __name__ == '__main__':
-
+def main():
   with app.app_context():
     db_setup.initialize_db(get_conn());
     
@@ -58,3 +58,6 @@ if __name__ == '__main__':
   app.config['TEMPLATES_AUTO_RELOAD'] = True
   print(os.environ['PY_PORT'])
   app.run(host="0.0.0.0", port=os.environ['PY_PORT'], debug=True)
+
+if __name__ == '__main__':
+  main()

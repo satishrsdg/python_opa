@@ -5,19 +5,25 @@ from . import TABLES
 def create_connection():
   conn = None
   try:
-    conn = sqlite3.connect('./app/db/products.db')
+    conn = sqlite3.connect('./src/app/db/products.db')
     conn.row_factory = convert_dbrows_to_dict
   except sqlite3.Error as  e:
     print(e)
 
   return conn
 
+def clean_up(conn):
+  c = conn.cursor()
+  # for table in TABLES.TABLES:
+  #   c.execute('DROP TABLE IF EXISTS ' + table['name'])
+  c.close()
+
 def initialize_schema(conn):
-    c = conn.cursor()
-    for table in TABLES.TABLES:
-        c.execute('DROP TABLE IF EXISTS ' + table['name'])
-        c.execute(table['schema'])
-    conn.commit()
+  c = conn.cursor()
+  for table in TABLES.TABLES:
+      c.execute('DROP TABLE IF EXISTS ' + table['name'])
+      c.execute(table['schema'])
+  conn.commit()
 
 def convert_dbrows_to_dict(cursor, row):
   return dict((cursor.description[idx][0], value) for idx, value in enumerate(row))

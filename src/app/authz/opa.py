@@ -70,7 +70,8 @@ import subprocess
 import json
 from collections import namedtuple
 from rego import ast, walk
-from db import sql
+
+from src.app.db import sql as sql
 
 class TranslationError(Exception):
     """Raised if an error occurs during the Rego to SQL translation."""
