@@ -9,8 +9,8 @@ def connection():
 
 @pytest.fixture(scope='module')
 def populate_db(connection):
-  print('----Populate Db---')  
-  db_setup.populate_data(connection)
+  print('----Initialize DB---')
+  db_setup.initialize_db(connection)
   yield connection
   print('----Tear down---')  
   db_setup.clean_up(connection)
