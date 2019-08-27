@@ -44,3 +44,4 @@ https://blog.codeship.com/using-docker-compose-for-python-development/
 #alias docker_clean_ps='docker rm $(docker ps --filter=status=exited --filter=status=created -q)'
 
 https://www.patricksoftwareblog.com/testing-a-flask-application-using-pytest/
+https://medium.com/mobileforgood/patterns-for-continuous-integration-with-docker-on-travis-ci-71857fff14c5
