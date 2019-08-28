@@ -22,28 +22,37 @@ def get_conn():
 
 @app.route('/', methods=["GET"])
 def index():
-  print("hello world")
-  return render_template('index.html', message="hello world")
-
-@app.route('/api/products/<category_assistant>/', methods=["POST"])
-def api_get_post(category_assistant):
-  data=request.get_json()
-  data['input']['path'] = ["api","products",category_assistant]
-  if access.is_access_allowed(data):
-    return flask.jsonify(db_setup.get_products_of_assistant(get_conn(), category_assistant))
-  else:
-    return { "result": "access denied"}
+  return render_template('index.html', message="Hello world")
 
 @app.route('/api/products/', methods=["GET"])
 def get_all_products():
   return flask.jsonify(db_setup.get_all_products(get_conn()));
 
+@app.route('/api/products/<category_assistant>', methods=["GET"])
+def api_get_static_resource(category_assistant):
+  user_name =  request.args['user_name']
+  if user_name is None:
+    user_name = ""
+  
+  path_list = request.path.strip("/").split("/")
+  input_dict = { "input": {
+        "user_name": user_name,
+        "path": path_list,
+        "method": request.method }}
+
+  if access.is_access_allowed(input_dict, 'allow_static'):
+     return render_template('image.html', user_name=user_name)
+  else:
+     return render_template('image.html', user_name="access_denied")
+
 @app.route('/api/products/', methods=["POST"])
 def get_restricted_products():
   data=request.get_json()
-  print(data)
-  sql = access.compile(data)
-  return flask.jsonify(db_setup.get_restricted_products(get_conn(),sql));
+  if access.is_access_allowed(data, 'allow_list_check'):
+    sql = access.compile(data)
+    return flask.jsonify(db_setup.get_restricted_products(get_conn(),sql));
+  else:
+    return render_template('image.html', user_name="access_denied")
 
 @app.teardown_appcontext
 def close_connection(e):

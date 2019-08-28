@@ -3,15 +3,22 @@ services:
   - docker
 
 before_install:
-  - source .env.sh
-  - docker-compose build
+  provider: elasticbeanstalk
+  region: "eu-west-2"
+  app: "docker"
+  env: "PythonOpa-env"
+  bucket_name: "PythonOpa-env.h322rfr367.eu-west-2.elasticbeanstalk.com"
+  bucket_path: "docker" 
+
+deploy:
+  http://pythonopa-env.h322rfr367.eu-west-2.elasticbeanstalk.com/
 
 language: python
 matrix:
   include:
     - python: 3.7
       dist: xenial
-      
+
 install:
   - pip install -r src/app/requirements.txt
 

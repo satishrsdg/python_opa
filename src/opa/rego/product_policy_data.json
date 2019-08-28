@@ -101,5 +101,11 @@
     "category_name": "Frozen",
     "sub_category": ["Ice cream & ice","Meals","Chips, pot. & rice"]
     }
+  },
+
+  "roles":{
+      "Admin" : {"names": ["Fleur","Frank"]},
+      "Manager":{"names": ["Will","Zara"]},
+      "StaticResource": {"names":["Anne","Jimmy","Rhys"]}
   }
 }

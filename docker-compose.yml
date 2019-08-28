@@ -9,6 +9,8 @@ services:
     #restart: always
     container_name: pyapp-container
     env_file: ./src/app/.env
+    environment: 
+      - "PYTHONUNBUFFERED=1"
     ports: 
     # these environment variables have to be set in calling os shell
     # can't be read from .env file
@@ -33,7 +35,7 @@ services:
       - 8181
     ports:
       - 8181:8181
-      
+
     volumes:
        - ./src/opa/rego:/usr/home/rego
     

@@ -1,22 +1,33 @@
 package authz.product_policy
 import data.products
+import data.roles
 
+default allow_static = false
 default allow = false
+default allow_list = false
 
-allow {
+allow_static {
+  trace("hello world")
   some user_name
-  input.method == "POST"
-  # use unification: user_name is copied from input. path
+  input.method == "GET"
+  roles["StaticResource"].names[_]=input.user_name
   ["api","products", user_name] = input.path 
-  input.user_name == user_name
-  
-  #products[user_name].category_assistant == input.user_name
-  #products[user_name].category_name = input.category_name
+  user_name == input.user_name
+}
+
+allow_list_check{
+  input.method == "POST"
+  input.user_name == input.resource_name
+}
+
+allow_list_check{
+  input.method == "POST"
+  roles["Admin"].names[_] == input.user_name
 }
 
 allow_list {
   input.method == "POST"
-  products[_].category_assistant == input.user_name
+  products[_].category_assistant == input.resource_name
 }
 
 

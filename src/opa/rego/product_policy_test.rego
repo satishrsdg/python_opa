@@ -1,40 +1,42 @@
 
 package authz.product_policy
-product_policy_data := {
-  
-    "Aidan": {"sub_category": ["Ready meals", "Fresh soup", "Dairy & eggs"],"category_name": "Dairy"},
-    "Anne": {"sub_category": ["Ready meals", "Fresh soup", "Dairy & eggs"],"category_name": "Bakery"},
-    "Claire":{"sub_category": ["Cider", "Wine", "Beer"],"category_name": "Beer"}
-}
 
-test_not_allow_with_anne_dairy {
-    not allow_cat_assistant_resource with input as {
-        "category_name": "Dairy",
-        "path" :["api","products","Anne"],
+import data.authz.product_policy as product_policy
+import data.roles
+# Allow access to static resource for Anne
+test_allow_static_with_anne{
+    product_policy.allow_static with input as {
         "user_name": "Anne",
-        "method": "POST"
+        "method": "GET",
+        "path": ["api","products","Anne"]
         }  
-        with data.product_policy_data as product_policy_data
+      with data.roles as roles
+}
+# Allow access to static resource for Rhys
+test_allow_static_with_rhys{
+    product_policy.allow_static with input as {
+        "user_name": "Rhys",
+        "method": "GET",
+        "path": ["api","products","Rhys"]
+        }  
+      with data.roles as roles
+}
+# Allow access to static resource for Jimmy
+test_allow_static_with_jimmy{
+    product_policy.allow_static with input as {
+        "user_name": "Jimmy",
+        "method": "GET",
+        "path": ["api","products","Jimmy"]
+        }  
+      with data.roles as roles
 }
 
-test_allow_with_anne_bakery {
-    product_policy.allow_cat_assistant_resource with input as {
-        "category_name": "Bakery",
-        "path" :["api","products","Anne"],
-        "user_name": "Anne",
-        "method": "POST"
+# Don't allow access to static resource for others
+test_not_allow_static_with_Others{
+    not product_policy.allow_static with input as {
+        "user_name": "Others",
+        "method": "GET",
+        "path": ["api","products","Others"]
         }  
-      with data.product_policy_data as product_policy_data
+      with data.roles as roles
 }
-
-test_allow_with_anne_calling_jim_bakery {
-    not allow_cat_assistant_resource with input as {
-        "category_name": "Bakery",
-        "path" :["api","products","Jim"],
-        "user_name": "Jim",
-        "method": "POST"
-        }  
-      with data.product_policy_data as product_policy_data
-}
-
-# 
