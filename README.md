@@ -76,3 +76,7 @@ we get back another rule
 ````
 
 This rule is then translated into the relevant sql query to filter out the data. This is explained very well in this article [OPA Partial Evaluation](https://blog.openpolicyagent.org/partial-evaluation-162750eaf422)
+
+## Instructions
+
+[Instructions](https://github.com/satish-ganesan-sainsbury/opa/blob/master/instructions.md)
