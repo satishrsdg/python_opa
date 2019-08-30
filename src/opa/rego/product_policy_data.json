@@ -106,6 +106,6 @@
   "roles":{
       "Admin" : {"names": ["Fleur","Frank"]},
       "Manager":{"names": ["Will","Zara"]},
-      "StaticResource": {"names":["Anne","Jimmy","Rhys"]}
+      "StaticResource": {"names":["Anne","Jimmy","Rhys","New"]}
   }
 }

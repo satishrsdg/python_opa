@@ -29,6 +29,7 @@ def get_all_products():
   return flask.jsonify(db_setup.get_all_products(get_conn()));
 
 @app.route('/api/products/<category_assistant>', methods=["GET"])
+@app.route('/api/products/<category_assistant>/', methods=["GET"])
 def api_get_static_resource(category_assistant):
   user_name =  request.args['user_name']
   if user_name is None:

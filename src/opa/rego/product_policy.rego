@@ -5,9 +5,9 @@ import data.roles
 default allow_static = false
 default allow = false
 default allow_list = false
+default test_policy = false
 
 allow_static {
-  trace("hello world")
   some user_name
   input.method == "GET"
   roles["StaticResource"].names[_]=input.user_name
@@ -27,7 +27,7 @@ allow_list_check{
 
 allow_list {
   input.method == "POST"
-  products[_].category_assistant == input.resource_name
+  products[_].category_assistant = input.resource_name
 }
 
 

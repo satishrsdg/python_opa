@@ -1,4 +1,4 @@
-#Implementing Authorization using Open Policy Agent
+# Implementing Authorization using Open Policy Agent
 
 ## Introduction
 
