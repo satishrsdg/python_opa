@@ -7,7 +7,7 @@
 * clone the github repository
 
 ```
-git clone git@github.com:satish-ganesan-sainsbury/opa.gits
+git clone git@github.com:satishrsdg/python_opa.git
 note: this uses ssh to download git repository
 ```
 
@@ -17,7 +17,7 @@ note: this uses ssh to download git repository
 * From working directory, change directory to opa
 
 ```
-cd opa #From the directory where git clone was executed.
+cd python_opa #From the directory where git clone was executed.
 code .
 ```
 
@@ -29,8 +29,8 @@ code .
 
 * Assumes docker is installed
 * The code-base has two docker containers
-  * Python app for the api. The python app internally uses sqlite to load data. src/db folder shows the tables and data loaded into sqllite
-  * OPA server to run the policies
+* Python app for the api. The python app internally uses sqlite to load data. src/db folder shows the tables and data loaded into sqllite
+* OPA server to run the policies
 * Run the code-block below to check if application can be launched and shutdown 
 
 ```
@@ -39,7 +39,7 @@ docker-compose config # checks if the docker-compose file can compile
 docker-compose up #launches the multi-container application
 ctrl + c or docker-compose down to shutdown the containers
 
-note: Requirements.txt has the below instruction which might be blocked by proxy. In such case proxy needs to be turned off before running the above block of code
+note: src/app/requirements.txt has the below instruction which might be blocked by proxy. In such case proxy needs to be turned off before running the above block of code
 
 git+http://github.com/open-policy-agent/rego-python
 
@@ -47,13 +47,20 @@ git+http://github.com/open-policy-agent/rego-python
 
 ## Install opa
 
-* Download OPA [OPA Github page](https://github.com/open-policy-agent/opa)
-* Set executable path to the executable. This is required only for interactive testing. Docker image is available and is used in the actual software
+* Download OPA [OPA Download page](https://www.openpolicyagent.org/docs/latest/#1-download-opa)
+* Set executable path to the OPA file. This is required only for interactive testing. Docker image is available and is used in the actual software
 
 ## Interactively test the policy data and rules
 
 ### Start opa in interactive mode
+* Run the following code from command prompt. The -w switch ensures that any changes to the files are automatically reflected within the interactive environment
 
+```
+cd src/opa/rego
+opa run -w  product_policy_data.json product_policy.rego input.rego
+```
+
+* Copy and paste the following commands in the interactive shell
 ```
 ## run the following commands (available in the file execution.rego) inside the interactive mode
 package execution
@@ -69,23 +76,24 @@ note:
 * product_policy.rego -> contains rules for the policy
 * input.json -> sets the input to test the policy
 
-### Execute commands in the interactive mode
+### Test the policy
+
+* Test the policy for default behaviour
 
 ```
-cd src/opa/rego
-#start the opa-interactive session
-opa run -w  product_policy_data.json product_policy.rego input.json
+# should result in true
+product_policy.allow_static 
+```
 
-#Test a policy
-product_policy.allow_static #should result in true
-
-#Change input.rego -w switch ensures the change is reflected in the interactive environment
-# change user_name to Jimmy1
-# re-running the policy should result in false
+* In `input.rego` change user_name to Jimmy and  re-run the policy. The result should result in false
+```
+# should result in false
 product_policy.allow_static
 ```
 
-## Run unit tests on the policy data and rules
+### Run unit tests on the policy data and rules
+
+Run test cases based on test file
 ```
 opa test  product_policy_data.json product_policy.rego product_policy_test.rego
 ```
@@ -98,13 +106,14 @@ docker-compose up
 ### To view unrestricted access to data
 
 ```
-In a browser
+#In a browser
 localhost:5000/api/products
 ```
 
 ### To view restricted access to data, shows image of Jimmy's resource
 
 ```
+# Jimmy and Anne are authorized to view information on themselves
 http://localhost:5000/api/products/Jimmy/?user_name=Jimmy
 http://localhost:5000/api/products/Anne/?user_name=Anne
 ```
@@ -112,6 +121,7 @@ http://localhost:5000/api/products/Anne/?user_name=Anne
 ### Unauthorized  access
 ```
 # Jimmy is not authorized to view Anne
+
 http://localhost:5000/api/products/Anne/?user_name=Jimmy
 ```
 
@@ -140,16 +150,17 @@ In addition to giving a concrete true or false decision, OPA also does partial e
 
 ```
 # Run the interactive server
-opa run -w  product_policy_data.json product_policy.rego input.json
+# cd to src/opa/rego from root directory
+opa run -w  product_policy_data.json product_policy.rego input.rego
 
 # copy and paste the following commands from execution.rego
 package execution
 import data.products
 import data.roles
-import data.authz.product_policy
+import data.authz.product_policy 
 
 # change input.rego 
-#set method = post
+# set method = post
 # changing GET to POST will automatically reflect in the interactive shell
 # as the shell is started with -w parameter
 package repl
@@ -167,7 +178,7 @@ input
 unknown data.products
 
 # run a policy that results in a partial query
-product_policy.allow_list
+data.authz.product_policy.allow_lists
 
 ## result 
 +-----------+-------------------------------------------------+

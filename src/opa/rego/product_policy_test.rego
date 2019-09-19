@@ -3,6 +3,7 @@ package authz.product_policy
 
 import data.authz.product_policy as product_policy
 import data.roles
+
 # Allow access to static resource for Anne
 test_allow_static_with_anne{
     product_policy.allow_static with input as {
